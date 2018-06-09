@@ -1,0 +1,254 @@
+<div class="row" style="color: black">
+
+
+  <div *ngIf="specificItemData.url.search('books')>-1" class="card col-md-12 ">
+    <div class="card text-center">
+      <div class="card-header">
+        <h1>Book Name : {{specificItemData.name}}</h1>
+      </div>
+      <div style="display: flex;justify-content: center;flex-wrap: wrap;">
+
+        <div class="card-body">
+          <h5 class="card-title">isbn</h5>
+          <p class="card-text">{{specificItemData.isbn}}</p>
+
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">authors</h5>
+          <p class="card-text">{{specificItemData.authors}}</p>
+        </div>
+
+      </div>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <div class="card-body">
+        <h5 class="card-title">numberOfPages</h5>
+        <p class="card-text">{{specificItemData.numberOfPages}}</p>
+      </div>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <div class="card-body">
+        <h5 class="card-title">publisher</h5>
+        <p class="card-text">{{specificItemData.publisher}}</p>
+      </div>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <div class="card-body">
+        <h5 class="card-title">country</h5>
+        <p class="card-text">{{specificItemData.country}}</p>
+      </div>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <div class="card-body">
+        <h5 class="card-title">mediaType And Released Date</h5>
+        <p class="card-text">{{specificItemData.mediaType}} && {{specificItemData.mediaType}}</p>
+      </div>
+
+    </div>
+    <div class="card-body" style="overflow-y:scroll;height: 200px;">
+      <h5>All Characters in the book</h5>
+
+      <div *ngFor="let character of specificItemData.characters">
+        <a [routerLink]="['/home','characters',getobjectId(character)]" onClick="window.location.reload()" class="btn btn-link">{{character}}</a>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="card-footer text-muted">
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['/home']">Get Back To Home</button>
+
+    </div>
+  </div>
+
+
+  <div *ngIf="specificItemData.url.search('characters')>-1" class="card col-md-12 ">
+    <div class="card text-center">
+      <div class="card-header">
+        <h1>character : {{specificItemData.name || specificItemData.aliases}}</h1>
+      </div>
+
+
+      <div class="card-body">
+        <h5 class="card-title">gender</h5>
+        <p class="card-text">{{specificItemData.gender}}</p>
+
+      </div>
+      <div *ngIf="specificItemData.born != ''" class="card-body">
+        <h5 class="card-title">Born</h5>
+        <p class="card-text">{{specificItemData.born}}</p>
+
+      </div>
+
+
+      <div *ngIf="specificItemData.died != ''" class="card-body">
+        <h5 class="card-title">Died</h5>
+        <p class="card-text">{{specificItemData.died}}</p>
+
+      </div>
+
+
+      <div *ngIf="specificItemData.father != ''" class="card-body">
+        <h5 class="card-title">Father</h5>
+        <a [routerLink]="['/home','characters', getobjectId(specificItemData.father)]" onClick="window.location.reload()" class="btn btn-link">
+          {{ (specificItemData.father)}}</a>
+
+      </div>
+
+      <div *ngIf="specificItemData.mother != ''" class="card-body">
+        <h5 class="card-title">Mother</h5>
+        <a [routerLink]="['/home','characters', getobjectId(specificItemData.mother)]" onClick="window.location.reload()" class="btn btn-link">
+          {{ (specificItemData.mother)}}</a>
+
+      </div>
+
+      <div *ngIf="specificItemData.spouse != ''" class="card-body">
+        <h5 class="card-title">Spouse</h5>
+        <a [routerLink]="['/home','characters', getobjectId(specificItemData.spouse)]" onClick="window.location.reload()" class="btn btn-link">
+          {{ (specificItemData.spouse)}}</a>
+
+      </div>
+
+    </div>
+    <h5 *ngIf="specificItemData.aliases != ''">All Aliases </h5>
+
+    <div *ngIf="specificItemData.aliases != ''" class="card-body" style="overflow-y:scroll;height: 70px;">
+      <div *ngFor="let alias of specificItemData.aliases">
+        {{alias}}
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+    <h5> All Books </h5>
+
+    <div style="overflow-y:scroll;height: 70px;">
+
+      <div *ngFor="let book of specificItemData.books">
+        <a [routerLink]="['/home','books',getobjectId(book)]" onClick="window.location.reload()" class="btn btn-link">Book No : {{ (book)}}</a>
+      </div>
+    </div>
+    <br>
+
+    <div *ngIf="specificItemData.tvSeries != ''">
+
+
+      <h5> All TV Series</h5>
+    </div>
+    <div *ngIf="specificItemData.tvSeries != ''" style="overflow-y:scroll;height: 70px;">
+      <div *ngFor="let series of specificItemData.tvSeries">
+        {{series}}
+      </div>
+    </div>
+
+
+
+
+    <div class="card-footer text-muted">
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['/home']">Get Back To Home</button>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="specificItemData.url.search('houses')>-1" class="card col-md-12 " style="color:black">
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>House Name : {{specificItemData.name }}</h1>
+    </div>
+    <div style="display: flex;justify-content: center;flex-wrap: wrap;">
+
+      <div class="card-body">
+        <h5 class="card-title">region</h5>
+        <p class="card-text">{{specificItemData.region}}</p>
+
+      </div>
+    </div>
+    <br>
+    <div *ngIf="specificItemData.coatOfArms != ''">
+      <h5 class="card-title">coatOfArms </h5>
+
+      <span>{{specificItemData.coatOfArms}} </span>
+    </div>
+    <br>
+
+    <div *ngIf="specificItemData.words != ''">
+      <h5 class="card-title">words </h5>
+
+      <span>{{specificItemData.words}} </span>
+    </div>
+
+    <div *ngIf="specificItemData.seats != ''">
+      <h5 class="card-title">seats </h5>
+
+      <span>{{specificItemData.seats}} </span>
+    </div>
+
+    <div *ngIf="specificItemData.currentLord != ''">
+      <h5 class="card-title">currentLord </h5>
+      <a [routerLink]="['/home','characters', getobjectId(specificItemData.currentLord)]" onClick="window.location.reload()" class="btn btn-link">
+        {{ (specificItemData.currentLord)}}</a>
+
+    </div>
+
+    <div *ngIf="specificItemData.heir != ''">
+      <h5 class="card-title">heir </h5>
+
+      <span>{{specificItemData.heir}} </span>
+    </div>
+    <div *ngIf="specificItemData.overlord != ''">
+      <h5 class="card-title">overlord </h5>
+
+      <a [routerLink]="['/home','characters',getobjectId (specificItemData.overlord)]" onClick="window.location.reload()" class="btn btn-link">
+        {{ (specificItemData.overlord)}}</a>
+    </div>
+    <div *ngIf="specificItemData.founded != ''">
+      <h5 class="card-title">founded </h5>
+
+      <span>{{specificItemData.founded}} </span>
+    </div>
+    <div *ngIf="specificItemData.founder != ''">
+      <h5 class="card-title">founder </h5>
+
+      <a [routerLink]="['/home','characters', getobjectId(specificItemData.founder)]" onClick="window.location.reload()" class="btn btn-link">
+        {{ (specificItemData.founder)}}</a>
+    </div>
+    <div *ngIf="specificItemData.diedOut != ''">
+
+      <h5 class="card-title">diedOut </h5>
+
+      <span>{{specificItemData.diedOut}} </span>
+    </div>
+    <div *ngIf="specificItemData.ancestralWeapons != ''">
+      <h5 class="card-title">ancestralWeapons </h5>
+
+      <span>{{specificItemData.ancestralWeapons}} </span>
+    </div>
+    <div *ngIf="specificItemData.cadetBranches != ''">
+      <h5 class="card-title">cadetBranches </h5>
+
+      <span>{{specificItemData.cadetBranches}} </span>
+    </div>
+
+    <h5 *ngIf="specificItemData.swornMembers != ''"> swornMembers </h5>
+
+    <div *ngIf="specificItemData.swornMembers != ''" class="card-body" style="overflow-y:scroll;height: 70px;">
+      <div *ngFor="let swornMembers of specificItemData.swornMembers">
+
+        <a [routerLink]="['/home','characters',getobjectId(swornMembers) ]" onClick="window.location.reload()" class="btn btn-link">
+          {{swornMembers}}</a>
+
+      </div>
+
+
+
+
+    </div>
+
+    <div class="card-footer text-muted">
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['/home']">Get Back To Home</button>
+
+    </div>
+  </div>

@@ -1,0 +1,72 @@
+<form>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h4>Filter By:</h4>
+    </div>
+    <div class="col-4">
+      <select class="form-control form-control-lg" [(ngModel)]="filterValue" name="filterValue">
+        <option value="All" ng-selected="ALL"> All</option>
+
+        <option value="houses">Houses Only</option>
+        <option value="books">Books Only</option>
+
+        <option value="characters">Characters Only</option>
+
+      </select>
+    </div>
+
+  </div>
+</form>
+<div class="row" style="padding-top:150px;padding-left:50px;">
+  <!-- installed and added Angular 5+ Order Pipe to sort -->
+
+  <div *ngFor="let item of finalData | orderBy: order : caseInsensitive | filterBy: filterValue" class="col-sm-12 col-md-4">
+
+    <div *ngIf="item.url">
+      <div *ngIf="item.url.search('books')>-1">
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">
+            <img src="assets/book.jpg" alt="Bookaltimg" style="width:100%; max-height:29vh" class="fluid-image"> Book
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{item.name }}</h5>
+            <p class="card-text">{{item.authors}}</p>
+
+            <a [routerLink]="['/home','books',getobjectId(item.url)]" class="btn btn-dark ">More Info</a>
+
+          </div>
+        </div>
+      </div>
+      <div *ngIf="item.url.search('characters')>-1">
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">
+            <img src="assets/{{item.gender}}.jpg" alt="Characteraltimg" style="width:100%; max-height:29vh" class="fluid-image"> Character
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{item.name || item.aliases}}</h5>
+            <p class="card-text">{{item.gender}}
+              <br>
+              <span>{{item.culture || 'No Culture'}}</span>
+            </p>
+            <a [routerLink]="['/home','characters',getobjectId(item.url)]" class="btn btn-dark">More Info</a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="item.url.search('houses')>-1">
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">
+            <img src="assets/house.jpg" alt="housealtimg" style="width:100%; max-height:29vh" class="fluid-image"> House
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.words || 'No qoute'}}</p>
+            <a [routerLink]="['/home','houses',getobjectId(item.url)]" class="btn btn-dark">More Info</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
